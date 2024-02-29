@@ -25,7 +25,6 @@ function InvoiceInfo() {
   );
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  console.log(allInvoices);
 
   useEffect(() => {
     getUser();

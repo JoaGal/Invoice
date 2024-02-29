@@ -63,21 +63,22 @@ export const useControlUser = () => {
 
   //get User
   const getUser = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      Axios.get(`${url}/get`, {
-        headers: {
-          Authorization: token, // Pass the token in the Authorization header
-        },
-      })
-        .then((response) => {
-          dispatch(setUser(response.data));
+    if (user.id === "") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        Axios.get(`${url}/get`, {
+          headers: {
+            Authorization: token, // Pass the token in the Authorization header
+          },
         })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
+          .then((response) => {
+            dispatch(setUser(response.data));
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      }
     }
   };
-
   return { registerUser, loginUser, logoutUser, getUser };
 };

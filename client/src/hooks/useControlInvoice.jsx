@@ -9,6 +9,7 @@ import forwardDate from "../functions/forwardDate";
 export const useControlInvoice = () => {
   const dispatch = useDispatch();
   const newInvoice = useSelector((state) => state.invoices.newInvoice);
+  const allInvoices = useSelector((state) => state.invoices.allInvoices);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const url = "https://invoicesdatabase.vercel.app/invoices";
@@ -70,7 +71,7 @@ export const useControlInvoice = () => {
   };
 
   const getInvoice = () => {
-    if (user?.id !== "") {
+    if (user?.id !== "" && allInvoices[0]?.id === undefined) {
       Axios.get(`${url}/get/${user?.id}`)
         .then((res) => {
           const allInvoices = res.data.invoices.map((invoice) => ({
