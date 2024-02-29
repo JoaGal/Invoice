@@ -11,9 +11,10 @@ export const useControlInvoice = () => {
   const newInvoice = useSelector((state) => state.invoices.newInvoice);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const url = "https://invoicesdatabase.vercel.app/invoices";
 
   const createInvoice = () => {
-    Axios.post("http://localhost:3306/invoices/create", {
+    Axios.post(`${url}/create`, {
       idUser: user?.id,
       street: newInvoice?.street,
       city: newInvoice?.city,
@@ -41,7 +42,7 @@ export const useControlInvoice = () => {
   };
 
   const updateInvoice = (id) => {
-    Axios.put("http://localhost:3306/invoices/update", {
+    Axios.put(`${url}/update`, {
       id: id,
       street: newInvoice?.street,
       city: newInvoice?.city,
@@ -70,12 +71,12 @@ export const useControlInvoice = () => {
 
   const getInvoice = () => {
     if (user?.id !== "") {
-      Axios.get(`http://localhost:3306/invoices/get/${user?.id}`)
+      Axios.get(`${url}/get/${user?.id}`)
         .then((res) => {
-          const allInvoices = res.data.invoices.map(invoice => ({
+          const allInvoices = res.data.invoices.map((invoice) => ({
             ...invoice,
             // Assuming your date field is named 'date'. Adjust if it's named differently.
-            date: forwardDate(invoice.date) 
+            date: forwardDate(invoice.date),
           }));
           const invoices = sortData(allInvoices, res.data.items);
           dispatch(setAllInvoices(invoices));
@@ -87,18 +88,17 @@ export const useControlInvoice = () => {
   };
 
   const deleteInvoice = (id) => {
-    Axios.delete(
-      `http://localhost:3306/invoices/delete/${id}`
-    ).then(() => {
-      navigate("/")
-    })
-    .catch((err) => {
-      console.log("Error delete invoice", err);
-    });
+    Axios.delete(`${url}/delete/${id}`)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log("Error delete invoice", err);
+      });
   };
 
   const updateStatusInvoice = (id, status) => {
-    Axios.put("http://localhost:3306/invoices/update/status", {
+    Axios.put(`${url}/update/status`, {
       id: id,
       status: `${status === "paid" ? "pending" : "paid"}`,
     })
@@ -109,7 +109,13 @@ export const useControlInvoice = () => {
       .catch((err) => {
         console.log("Error updating invoice", err);
       });
-  }
+  };
 
-  return { createInvoice, getInvoice, deleteInvoice, updateInvoice, updateStatusInvoice };
+  return {
+    createInvoice,
+    getInvoice,
+    deleteInvoice,
+    updateInvoice,
+    updateStatusInvoice,
+  };
 };

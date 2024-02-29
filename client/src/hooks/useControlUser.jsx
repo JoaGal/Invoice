@@ -8,13 +8,13 @@ export const useControlUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const url = "https://invoicesdatabase.vercel.app/users";
   //Register User
   const registerUser = async () => {
     const { name, email, password, confirmPassword, address } = user;
     if (password === confirmPassword) {
       try {
-        const res = await Axios.post("http://localhost:3306/users/register", {
+        const res = await Axios.post(`${url}/register`, {
           name,
           email,
           password,
@@ -38,7 +38,7 @@ export const useControlUser = () => {
   const loginUser = async () => {
     const { email, password } = user;
     try {
-      const res = await Axios.post("http://localhost:3306/users/login", {
+      const res = await Axios.post(`${url}/login`, {
         email,
         password,
       });
@@ -65,7 +65,7 @@ export const useControlUser = () => {
   const getUser = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      Axios.get("http://localhost:3306/users/get", {
+      Axios.get(`${url}/get`, {
         headers: {
           Authorization: token, // Pass the token in the Authorization header
         },
