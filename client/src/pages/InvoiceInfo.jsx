@@ -11,6 +11,7 @@ import { editInvoice } from "../redux/slice/invoiceSlice";
 import { useControlInvoice } from "../hooks/useControlInvoice";
 import { useControlUser } from "../hooks/useControlUser";
 import { ItemsCard } from "../components/ItemsCard";
+import totalPrice from "../functions/totalPrice";
 
 function InvoiceInfo() {
   const navigate = useNavigate();
@@ -157,7 +158,7 @@ function InvoiceInfo() {
             <div className=" p-10 font-semibold text-white rounded-lg rounded-t-none justify-between flex dark:bg-black bg-gray-700 ">
               <h3 className=" text-xl ">Amount Due</h3>
 
-              <h1 className=" text-3xl">£{"00"}</h1>
+              <h1 className=" text-3xl">£{filteredInvoice && totalPrice(filteredInvoice)}</h1>
             </div>
           </div>
         </div>
