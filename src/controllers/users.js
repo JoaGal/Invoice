@@ -3,20 +3,28 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, address } = req.body;
   // Hash the password
   const sqlcheckEmail = "SELECT * FROM Users WHERE email = ?";
   db.query(sqlcheckEmail, [email], async (err, results) => {
     if (err) {
       return res.status(500).send("Error checking email");
+    } else if (
+      name === "" &&
+      email === "" &&
+      password === "" &&
+      address === ""
+    ) {
+      return res.status(409).send("Complete Form");
     } else if (results.length > 0) {
       // Email is already registered
       return res.status(409).send("Email already exists");
     }
     // Email is not registered, proceed with registration
     const hashedPassword = await bcrypt.hash(password, 10);
-    const sql = "INSERT INTO Users (name, email, password) VALUES (?, ?, ?)";
-    db.query(sql, [name, email, hashedPassword], (err, result) => {
+    const sql =
+      "INSERT INTO Users (name, email, password, address) VALUES (?, ?, ?, ?)";
+    db.query(sql, [name, email, hashedPassword, address], (err, result) => {
       if (err) {
         return res.status(500).send("Error registering user");
       }
@@ -66,6 +74,7 @@ const getUser = (req, res) => {
           id: result[0].id,
           name: result[0].name,
           email: result[0].email,
+          adrress: result[0].adrress,
           // Add other user data as needed
         };
         res.status(200).json(userData);
