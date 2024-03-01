@@ -16,11 +16,10 @@ function Home() {
   const filter = ["paid", "pending"];
   const [isDropdown, setIsDropdown] = useState(false);
   const [openCreateInvoice, setOpenCreateInvoice] = useState(false);
-  const {getUser} = useControlUser();
-  const {getInvoice} = useControlInvoice(); 
+  const { getUser } = useControlUser();
+  const { getInvoice } = useControlInvoice();
   const [filterValue, setfilterValue] = useState("");
   const allInvoices = useSelector((state) => state.invoices.allInvoices);
-  
 
   useEffect(() => {
     controls.start({
@@ -32,13 +31,14 @@ function Home() {
         damping: 20,
       },
     });
-    getUser()
-  }, [controls]); 
+    getUser();
+  }, [controls]);
 
-  useEffect(()=>{
-    getInvoice();
-  },[user])
-
+  useEffect(() => {
+    if (user?.id !== "" && allInvoices[0]?.id === undefined) {
+      getInvoice();
+    }
+  }, [user]);
 
   const transition = {
     stiffness: 200,
@@ -127,7 +127,9 @@ function Home() {
                   ))}
                 </motion.div>
               )}
-              <CreateInvoiceButton setOpenCreateInvoice={setOpenCreateInvoice}/>
+              <CreateInvoiceButton
+                setOpenCreateInvoice={setOpenCreateInvoice}
+              />
             </div>
           </div>
 
@@ -146,7 +148,7 @@ function Home() {
                 exit={{ opacity: 0, y: 50 }}
                 transition={{ duration: 0.5 }}
               >
-                <InvoiceCard invoice={invoice} index={index}/>
+                <InvoiceCard invoice={invoice} index={index} />
               </motion.div>
             ))}
           </div>
@@ -154,9 +156,7 @@ function Home() {
       </div>
       <AnimatePresence>
         {openCreateInvoice && (
-          <CreateInvoice
-            setOpenCreateInvoice={setOpenCreateInvoice}
-          />
+          <CreateInvoice setOpenCreateInvoice={setOpenCreateInvoice} />
         )}
       </AnimatePresence>
     </div>

@@ -32,7 +32,9 @@ function InvoiceInfo() {
   }, []);
 
   useEffect(() => {
-    getInvoice();
+    if (user?.id !== "" && allInvoices[0]?.id === undefined) {
+      getInvoice();
+    }
   }, [user]);
 
   const handleEditInvoice = () => {
@@ -158,7 +160,9 @@ function InvoiceInfo() {
             <div className=" p-10 font-semibold text-white rounded-lg rounded-t-none justify-between flex dark:bg-black bg-gray-700 ">
               <h3 className=" text-xl ">Amount Due</h3>
 
-              <h1 className=" text-3xl">£{filteredInvoice && totalPrice(filteredInvoice)}</h1>
+              <h1 className=" text-3xl">
+                £{filteredInvoice && totalPrice(filteredInvoice)}
+              </h1>
             </div>
           </div>
         </div>

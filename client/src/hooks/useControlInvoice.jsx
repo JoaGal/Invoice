@@ -71,7 +71,6 @@ export const useControlInvoice = () => {
   };
 
   const getInvoice = () => {
-    if (user?.id !== "" && allInvoices[0]?.id === undefined) {
       Axios.get(`${url}/get/${user?.id}`)
         .then((res) => {
           const allInvoices = res.data.invoices.map((invoice) => ({
@@ -85,7 +84,6 @@ export const useControlInvoice = () => {
         .catch((err) => {
           console.log(err);
         });
-    }
   };
 
   const deleteInvoice = (id) => {
