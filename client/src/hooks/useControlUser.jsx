@@ -76,6 +76,7 @@ export const useControlUser = () => {
           })
           .catch((error) => {
             console.error("Error fetching user data:", error);
+            localStorage.removeItem("token");
           });
       }
     }
