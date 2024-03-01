@@ -80,7 +80,7 @@ function Home() {
                 Invoices
               </h1>
               <p className=" text-gray-500 font-light">
-                There are {allInvoices.length} total invoices.
+                {token ? `There are ${allInvoices.length} total invoices.` : "Sign in to save personal invoices."}
               </p>
             </div>
 
