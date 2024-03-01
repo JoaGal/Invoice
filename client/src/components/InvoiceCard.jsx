@@ -9,7 +9,7 @@ function InvoiceCard({ invoice }) {
   
 
   return (
-    <Link to={`/${invoice.id}`}>
+    <Link to={`/${invoice.example === true ? "login" : invoice.id}`}>
       <div className="flex cursor-pointer duration-100  ease-in-out  hover:border border-purple-500 py-4 shadow-sm px-6 dark:bg-[#1E2139] bg-white rounded-lg  items-center justify-between">
         <div className=" flex max-md:flex-col items-start md:items-center ">
           <h2 className=" dark:text-white ">

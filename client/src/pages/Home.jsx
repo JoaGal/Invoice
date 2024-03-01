@@ -4,10 +4,11 @@ import arrowDown from "../assets/icon-arrow-down.svg";
 import InvoiceCard from "../components/InvoiceCard";
 import { useSelector } from "react-redux";
 import CreateInvoice from "../components/CreateInvoice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useControlUser } from "../hooks/useControlUser";
 import { CreateInvoiceButton } from "../components/CreateInvoiceButton";
 import { useControlInvoice } from "../hooks/useControlInvoice";
+import invoiceData from "../Data/invoice.json";
 
 function Home() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function Home() {
   const { getInvoice } = useControlInvoice();
   const [filterValue, setfilterValue] = useState("");
   const allInvoices = useSelector((state) => state.invoices.allInvoices);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     controls.start({
@@ -132,25 +134,26 @@ function Home() {
               />
             </div>
           </div>
-
           {/* Invoice Cards */}
 
           <div className=" mt-10   space-y-4">
-            {allInvoices.map((invoice, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: -50 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: index * 0.2 },
-                }}
-                exit={{ opacity: 0, y: 50 }}
-                transition={{ duration: 0.5 }}
-              >
-                <InvoiceCard invoice={invoice} index={index} />
-              </motion.div>
-            ))}
+            {(token !== null ? allInvoices : invoiceData).map(
+              (invoice, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: { delay: index * 0.2 },
+                  }}
+                  exit={{ opacity: 0, y: 50 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <InvoiceCard invoice={invoice} />
+                </motion.div>
+              )
+            )}
           </div>
         </motion.div>
       </div>
