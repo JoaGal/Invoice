@@ -1,7 +1,7 @@
 import React from "react";
 import { useControlInvoice } from "../hooks/useControlInvoice";
 
-function DeleteModal({ setIsDeleteModalOpen, id }) {
+export const DeleteModal = ({ setIsDeleteModalOpen, id }) => {
   const { deleteInvoice } = useControlInvoice();
 
   const handleDelete = () => {
@@ -42,6 +42,4 @@ function DeleteModal({ setIsDeleteModalOpen, id }) {
       </div>
     </div>
   );
-}
-
-export default DeleteModal;
+};

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { inputInvoice, inputItems } from "../redux/slice/invoiceSlice";
 
-function InputCreateInvoice({ name, value, nameInput, type, index }) {
+export const InputCreateInvoice = ({ name, value, nameInput, type, index }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -27,6 +27,4 @@ function InputCreateInvoice({ name, value, nameInput, type, index }) {
       />
     </>
   );
-}
-
-export default InputCreateInvoice;
+};

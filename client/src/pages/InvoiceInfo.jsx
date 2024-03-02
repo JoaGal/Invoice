@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import leftArrow from "../assets/icon-arrow-left.svg";
-import { AnimatePresence, motion } from "framer-motion";
-import PaidStatus from "../components/PaidStatus";
+import { AnimatePresence } from "framer-motion";
+import { PaidStatus } from "../components/PaidStatus";
 import { useDispatch, useSelector } from "react-redux";
 import formatDate from "../functions/formatDate";
-import DeleteModal from "../components/DeleteModal";
-import CreateInvoice from "../components/CreateInvoice";
+import { DeleteModal } from "../components/DeleteModal";
+import { FormCreateInvoice } from "../components/FormCreateInvoice";
 import { editInvoice } from "../redux/slice/invoiceSlice";
 import { useControlInvoice } from "../hooks/useControlInvoice";
 import { useControlUser } from "../hooks/useControlUser";
@@ -168,7 +168,7 @@ function InvoiceInfo() {
       )}
       <AnimatePresence>
         {isEditOpen && (
-          <CreateInvoice
+          <FormCreateInvoice
             id={idInvoice}
             type="edit"
             setOpenCreateInvoice={setIsEditOpen}

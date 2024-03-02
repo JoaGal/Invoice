@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import formatDate from "../functions/formatDate";
 import totalPrice from "../functions/totalPrice";
 
-function InvoiceCard({ invoice }) {
-  
-
+export const InvoiceCard = ({ invoice }) => {
   return (
     <Link to={`/${invoice.example === true ? "login" : invoice.id}`}>
       <div className="flex cursor-pointer duration-100  ease-in-out  hover:border border-purple-500 py-4 shadow-sm px-6 dark:bg-[#1E2139] bg-white rounded-lg  items-center justify-between">
@@ -33,6 +31,4 @@ function InvoiceCard({ invoice }) {
       </div>
     </Link>
   );
-}
-
-export default InvoiceCard;
+};

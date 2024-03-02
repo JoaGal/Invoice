@@ -3,7 +3,7 @@ import plus from "../assets/plus.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export const CreateInvoiceButton = ({ setOpenCreateInvoice }) => {
+export const ButtonCreateInvoice = ({ setOpenCreateInvoice }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 

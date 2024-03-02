@@ -1,8 +1,7 @@
 import React from "react";
-import InputAuthUser from "./InputAuthUser";
+import { InputAuthUser } from "./InputAuthUser";
 
-export const FormAuthUser = ({data, func, title}) => {
-
+export const FormAuthUser = ({ data, func, title }) => {
   return (
     <div className="flex flex-col gap-4 mt-4">
       {data.map((item) => (

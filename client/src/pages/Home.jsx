@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import arrowDown from "../assets/icon-arrow-down.svg";
-import InvoiceCard from "../components/InvoiceCard";
+import { InvoiceCard } from "../components/InvoiceCard";
 import { useSelector } from "react-redux";
-import CreateInvoice from "../components/CreateInvoice";
-import { useLocation } from "react-router-dom";
+import { FormCreateInvoice } from "../components/FormCreateInvoice";
 import { useControlUser } from "../hooks/useControlUser";
-import { CreateInvoiceButton } from "../components/CreateInvoiceButton";
+import { ButtonCreateInvoice } from "../components/ButtonCreateInvoice";
 import { useControlInvoice } from "../hooks/useControlInvoice";
 import invoiceData from "../Data/invoice.json";
 import { Container } from "../components/Container";
 
 function Home() {
-  const location = useLocation();
   const controls = useAnimation();
   const user = useSelector((state) => state.user);
   const filter = ["paid", "pending"];
@@ -124,7 +122,7 @@ function Home() {
                 ))}
               </motion.div>
             )}
-            <CreateInvoiceButton setOpenCreateInvoice={setOpenCreateInvoice} />
+            <ButtonCreateInvoice setOpenCreateInvoice={setOpenCreateInvoice} />
           </div>
         </div>
         {/* Invoice Cards */}
@@ -151,7 +149,7 @@ function Home() {
       </Container>
       <AnimatePresence>
         {openCreateInvoice && (
-          <CreateInvoice setOpenCreateInvoice={setOpenCreateInvoice} />
+          <FormCreateInvoice setOpenCreateInvoice={setOpenCreateInvoice} />
         )}
       </AnimatePresence>
     </>
