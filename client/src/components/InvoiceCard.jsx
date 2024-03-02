@@ -1,5 +1,5 @@
 import React from "react";
-import PaidStatus from "./PaidStatus";
+import { PaidStatus } from "./PaidStatus";
 import rightArrow from "../assets/icon-arrow-right.svg";
 import { Link } from "react-router-dom";
 import formatDate from "../functions/formatDate";
