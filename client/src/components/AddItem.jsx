@@ -1,5 +1,5 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
-import InputCreateInvoice from "./InputCreateInvoice";
+import { InputCreateInvoice } from "./InputCreateInvoice";
 import { useDispatch } from "react-redux";
 import { deleteItem } from "../redux/slice/invoiceSlice";
 
